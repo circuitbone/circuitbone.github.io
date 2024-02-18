@@ -1,1 +1,167 @@
-hello world
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amiga Computer Console</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111; /* Dark background */
+      color: white; /* White text */
+      font-size: 16px; /* Increased font size for body */
+    }
+    #console-container {
+      width: 80%;
+      margin: 20px auto;
+      border: 2px solid lime; /* Lime border */
+      background-color: #222; /* Dark console background */
+      overflow-y: auto; /* Enable vertical scrollbar */
+      max-height: 480px; /* Set max height for the console output */
+    }
+    #console-output {
+      padding: 10px;
+      font-size: 18px; /* Increased font size for console output */
+    }
+    #input-container {
+      display: flex;
+      align-items: center; /* Align items vertically */
+      padding: 10px;
+      background-color: #333; /* Dark input background */
+      border: none;
+      outline: none;
+    }
+    #prompt {
+      color: lime; /* Lime color for the prompt symbol */
+      margin-right: 5px; /* Add some spacing between the prompt symbol and the input */
+    }
+    #input {
+      flex: 1; /* Take up remaining space */
+      padding: 5px;
+      background-color: #333; /* Dark input background */
+      color: white; /* White text */
+      border: none;
+      outline: none;
+      font-size: 16px; /* Increased font size for input box */
+    }
+    li {
+      font-size: 18px; /* Increased font size for command list items */
+    }
+  </style>
+</head>
+<body>
+  <div id="console-container">
+    <div id="console-output"></div>
+  </div>
+  <div id="input-container">
+    <span id="prompt">></span> <!-- Faux console prompt symbol -->
+    <input type="text" id="input" placeholder="Type your command here..." autocomplete="off">
+  </div>
+
+  <script>
+    const consoleContainer = document.getElementById('console-container');
+    const consoleOutput = document.getElementById('console-output');
+    const input = document.getElementById('input');
+    let commandHistory = [];
+    let historyIndex = -1;
+
+    function handleCommand(command) {
+      commandHistory.push(command);
+      historyIndex = -1;
+
+      switch(command) {
+        case 'help':
+          consoleOutput.innerHTML += "<p>Available commands:</p>";
+          consoleOutput.innerHTML += "<ul>";
+          consoleOutput.innerHTML += "<li>date - Show current date and time</li>";
+          consoleOutput.innerHTML += "<li>browser - Show browser detection string</li>";
+          consoleOutput.innerHTML += "<li>command1 - Description of command 1</li>";
+          consoleOutput.innerHTML += "<li>command2 - Description of command 2</li>";
+          consoleOutput.innerHTML += "<li>command3 - Description of command 3</li>";
+          consoleOutput.innerHTML += "<li>command4 - Description of command 4</li>";
+          consoleOutput.innerHTML += "<li>command5 - Description of command 5</li>";
+          consoleOutput.innerHTML += "<li>command6 - Description of command 6</li>";
+          consoleOutput.innerHTML += "<li>command7 - Description of command 7</li>";
+          consoleOutput.innerHTML += "<li>command8 - Description of command 8</li>";
+          consoleOutput.innerHTML += "<li>command9 - Description of command 9</li>";
+          consoleOutput.innerHTML += "<li>command10 - Description of command 10</li>";
+          consoleOutput.innerHTML += "</ul>";
+          break;
+        case 'start':
+          consoleOutput.innerHTML += "<p>Starting the system...</p>";
+          // Add any functionality for starting the system here
+          break;
+        case 'date':
+          const currentDate = new Date().toLocaleString();
+          consoleOutput.innerHTML += "<p>Current date and time: " + currentDate + "</p>";
+          break;
+        case 'browser':
+          const browserString = navigator.userAgent;
+          consoleOutput.innerHTML += "<p>Browser detection string: " + browserString + "</p>";
+          break;
+        case 'command1':
+          consoleOutput.innerHTML += "<p>Executing command 1...</p>";
+          // Add functionality for command 1 here
+          break;
+        case 'command2':
+          consoleOutput.innerHTML += "<p>Executing command 2...</p>";
+          // Add functionality for command 2 here
+          break;
+        case 'command3':
+          consoleOutput.innerHTML += "<p>Executing command 3...</p>";
+          // Add functionality for command 3 here
+          break;
+        case 'command4':
+          consoleOutput.innerHTML += "<p>Executing command 4...</p>";
+          // Add functionality for command 4 here
+          break;
+        case 'command5':
+          consoleOutput.innerHTML += "<p>Executing command 5...</p>";
+          // Add functionality for command 5 here
+          break;
+        case 'command6':
+          consoleOutput.innerHTML += "<p>Executing command 6...</p>";
+          // Add functionality for command 6 here
+          break;
+        case 'command7':
+          consoleOutput.innerHTML += "<p>Executing command 7...</p>";
+          // Add functionality for command 7 here
+          break;
+        case 'command8':
+          consoleOutput.innerHTML += "<p>Executing command 8...</p>";
+          // Add functionality for command 8 here
+          break;
+        case 'command9':
+          consoleOutput.innerHTML += "<p>Executing command 9...</p>";
+          // Add functionality for command 9 here
+          break;
+        case 'command10':
+          consoleOutput.innerHTML += "<p>Executing command 10...</p>";
+          // Add functionality for command 10 here
+          break;
+        default:
+          consoleOutput.innerHTML += "<p>Unknown command. Type 'help' for a list of commands.</p>";
+      }
+
+      consoleContainer.scrollTop = consoleContainer.scrollHeight;
+    }
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const command = input.value.trim();
+        input.value = '';
+        handleCommand(command);
+      } else if (e.key === 'ArrowUp') {
+        if (historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          input.value = commandHistory[commandHistory.length - historyIndex - 1];
+        }
+      } else if (e.key === 'ArrowDown') {
+        if (historyIndex >= 0) {
+          historyIndex--;
+          input.value = historyIndex === -1 ? '' : commandHistory[commandHistory.length - historyIndex - 1];
+        }
+      }
+    });
+  </script>
+</body>
+</html>
